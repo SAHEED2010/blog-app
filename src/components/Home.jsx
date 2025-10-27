@@ -12,8 +12,9 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filter blogs by title (existing logic remains)
+  console.log("DEBUG: blogs value:", blogs, "Is array:", Array.isArray(blogs));
   const filteredBlogs =
-    blogs?.filter((blog) =>
+    Array.isArray(blogs) ? blogs.filter((blog) =>
       blog.title.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 
@@ -25,7 +26,9 @@ const Home = () => {
         method: "DELETE",
       }
     ); // Correctly construct the URL for deleting a blog
-    setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));
+    setBlogs((prevBlogs) =>
+      Array.isArray(prevBlogs) ? prevBlogs.filter((blog) => blog.id !== id) : []
+    );
   };
 
   return (
