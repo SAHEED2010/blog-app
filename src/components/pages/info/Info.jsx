@@ -6,14 +6,14 @@ const Info = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: blog, isPending } = UseFetch( // Correctly construct the URL for fetching a single blog
-    `/api/blogs/${id}`
+  const { data: blog, isPending } = UseFetch(
+    `https://mocki.io/v1/cd58a8f0-f5d1-4287-8c16-5a37ca1832b8/${id}`
   );
 
   const handleDelete = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
-    fetch(`/api/blogs/${id}`, { // Correctly construct the URL for deleting a single blog
+    fetch(`https://mocki.io/v1/cd58a8f0-f5d1-4287-8c16-5a37ca1832b8/${id}`, {
       method: "DELETE",
     }).then(() => {
       setShowPopUp(true);

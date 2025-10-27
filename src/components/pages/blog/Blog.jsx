@@ -17,7 +17,7 @@ const Blog = () => {
     setIsPending(true);
     console.log(blogs);
 
-    fetch("/api/blogs", {
+    fetch("https://mocki.io/v1/cd58a8f0-f5d1-4287-8c16-5a37ca1832b8", {
       // Use a relative path for the API endpoint
       method: "POST",
       headers: { "Content-Type": "application/json" },
