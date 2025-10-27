@@ -77,16 +77,15 @@ const Blog = () => {
           >
             Blog author
           </label>
-          <select
+          <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="blog-author"
             required
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           >
-            <option value="Lisa">Lisa</option>
-            <option value="Yusuf">Yusuf</option>
-          </select>
+            
+          </input>
         </div>
         <button
           className="w-full bg-blue-500 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

@@ -7,7 +7,7 @@ const Home = () => {
     data: blogs,
     isPending,
     setData: setBlogs,
-  } = UseFetch("http://localhost:8000/blogs");
+  } = UseFetch("/data/db.json");
 
   const [searchTerm, setSearchTerm] = useState("");
 
