@@ -17,7 +17,8 @@ const Blog = () => {
     setIsPending(true);
     console.log(blogs);
 
-    fetch("http://localhost:8000/blogs", {
+    fetch("/api/blogs", {
+      // Use a relative path for the API endpoint
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blogs),
@@ -83,9 +84,7 @@ const Blog = () => {
             required
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-          >
-            
-          </input>
+          ></input>
         </div>
         <button
           className="w-full bg-blue-500 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

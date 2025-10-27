@@ -6,12 +6,12 @@ const Home = () => {
   const {
     data: blogs,
     isPending,
-    setData: setBlogs,
-  } = UseFetch("/data/db.json");
+    setData: setBlogs, // Fetch all blogs from the API endpoint
+  } = UseFetch("/api/blogs");
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter blogs by title
+  // Filter blogs by title (existing logic remains)
   const filteredBlogs =
     blogs?.filter((blog) =>
       blog.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -19,7 +19,7 @@ const Home = () => {
 
   // Delete handler
   const handleDelete = async (id) => {
-    await fetch(`/data/db.json${id}`, { method: "DELETE" });
+    await fetch(`/api/blogs/${id}`, { method: "DELETE" }); // Correctly construct the URL for deleting a blog
     setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));
   };
 

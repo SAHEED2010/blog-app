@@ -6,14 +6,14 @@ const Info = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: blog, isPending } = UseFetch(
-    "/data/db.json" + id
+  const { data: blog, isPending } = UseFetch( // Correctly construct the URL for fetching a single blog
+    `/api/blogs/${id}`
   );
 
   const handleDelete = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
-    fetch("/data/db.json" + id, {
+    fetch(`/api/blogs/${id}`, { // Correctly construct the URL for deleting a single blog
       method: "DELETE",
     }).then(() => {
       setShowPopUp(true);
