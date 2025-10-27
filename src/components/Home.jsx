@@ -19,7 +19,7 @@ const Home = () => {
 
   // Delete handler
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:8000/blogs/${id}`, { method: "DELETE" });
+    await fetch(`/data/db.json${id}`, { method: "DELETE" });
     setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));
   };
 

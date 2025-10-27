@@ -7,13 +7,13 @@ const Info = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data: blog, isPending } = UseFetch(
-    "http://localhost:8000/blogs/" + id
+    "/data/db.json" + id
   );
 
   const handleDelete = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
-    fetch("http://localhost:8000/blogs/" + id, {
+    fetch("/data/db.json" + id, {
       method: "DELETE",
     }).then(() => {
       setShowPopUp(true);
