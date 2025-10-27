@@ -13,10 +13,10 @@ const Home = () => {
 
   // Filter blogs by title (existing logic remains)
   console.log("DEBUG: blogs value:", blogs, "Is array:", Array.isArray(blogs));
-  const filteredBlogs =
-    Array.isArray(blogs) ? blogs.filter((blog) =>
-      blog.title.toLowerCase().includes(searchTerm.toLowerCase())
-    ) || [];
+ const filteredBlogs = Array.isArray(blogs)
+   ? blogs.filter((blog) => blog.title.includes(searchTerm))
+   : [];
+
 
   // Delete handler
   const handleDelete = async (id) => {
