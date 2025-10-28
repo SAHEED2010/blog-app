@@ -14,17 +14,7 @@ const UseFetch = (url) => {
           return res.json();
         })
         .then((data) => {
-          // Check if the fetched data is an object with a 'blogs' property
-          if (
-            data &&
-            typeof data === "object" &&
-            !Array.isArray(data) &&
-            data.blogs
-          ) {
-            setData(data.blogs);
-          } else {
-            setData(data);
-          }
+          setData(data);
           setIsPending(false);
         })
         .catch((err) => {

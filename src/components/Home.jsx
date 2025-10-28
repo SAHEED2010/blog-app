@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BlogList from "./pages/blog/BlopgList";
+import BlogList from "./pages/blog/BlogList";
 import UseFetch from "./hooks/UseFetch";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     data: blogs,
     isPending,
     setData: setBlogs, // Fetch all blogs from the API endpoint
-  } = UseFetch("https://mocki.io/v1/cd58a8f0-f5d1-4287-8c16-5a37ca1832b8");
+  } = UseFetch(`${import.meta.env.VITE_API_BASE_URL}/blogs`);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -19,12 +19,9 @@ const Home = () => {
 
   // Delete handler
   const handleDelete = async (id) => {
-    await fetch(
-      `https://mocki.io/v1/cd58a8f0-f5d1-4287-8c16-5a37ca1832b8/${id}`,
-      {
-        method: "DELETE",
-      }
-    ); // Correctly construct the URL for deleting a blog
+    await fetch(`${import.meta.env.VITE_API_BASE_URL}/blogs/${id}`, {
+      method: "DELETE",
+    }); // Correctly construct the URL for deleting a blog
     setBlogs((prevBlogs) =>
       Array.isArray(prevBlogs) ? prevBlogs.filter((blog) => blog.id !== id) : []
     );

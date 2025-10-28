@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Counter from "./components/Counter";
 import { Routes, Route } from "react-router-dom";
-import Contact from "./components/pages/contact/Contact";
 import Blog from "./components/pages/blog/Blog";
 import Info from "./components/pages/info/Info";
 import Notfound from "./components/pages/notfound/Notfound";

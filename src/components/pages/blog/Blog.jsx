@@ -1,111 +1,93 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
   const [title, setTitle] = useState("");
-  const [showPopUp, setShowpopUp] = useState(false);
-  const [isPending, setIsPending] = useState(false);
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("Lisa");
+  const [author, setAuthor] = useState("mario"); // Default author
+  const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blogs = { title, body, author };
+    const blog = { title, body, author };
 
     setIsPending(true);
-    console.log(blogs);
 
-    fetch("https://mocki.io/v1/cd58a8f0-f5d1-4287-8c16-5a37ca1832b8", {
-      // Use a relative path for the API endpoint
+    // In a real app, you would send this to your server
+    // For now, we'll just log it and navigate home
+    console.log("New blog submitted:", blog);
+
+    // Example of a POST request
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/blogs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(blogs),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          // Log an error if the server responds with a status like 404 or 405
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        // Only proceed if the request was successful
-        setShowpopUp(true);
-        setTimeout(() => setShowpopUp(false), 2000); // Increased timeout for visibility
-        setTitle("");
-        setBody("");
-        setAuthor("Lisa");
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
+      body: JSON.stringify(blog),
+    }).then(() => {
+      console.log("New blog added");
+      setIsPending(false);
+      // Navigate back to the home page after submission
+      navigate("/");
+    });
   };
 
   return (
-    <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-        Add a new Blog
-      </h1>
-
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="blog-title"
-          >
-            Blog title:
+    <div className="max-w-lg mx-auto p-4 sm:p-6 lg:p-8 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+      <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-6">
+        Add a New Blog
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Blog Title:
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="blog-title"
             type="text"
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
           />
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="blog-body"
-          >
-            Blog body
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Blog Body:
           </label>
           <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32"
-            id="blog-body"
             required
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 h-32"
           ></textarea>
         </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="blog-author"
-          >
-            Blog author
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Blog Author:
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="blog-author"
-            required
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
           ></input>
         </div>
-        <button
-          className="w-full bg-blue-500 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-          disabled={isPending}
-        >
-          {isPending ? "Adding Blog..." : "Add Blog"}
-        </button>
-        {showPopUp && (
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg animate-bounce">
-            ✅ Successful!
-          </div>
-        )}
+        <div>
+          {!isPending && (
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+            >
+              Add Blog
+            </button>
+          )}
+          {isPending && (
+            <button
+              disabled
+              className="w-full bg-blue-400 text-white font-bold py-2 px-4 rounded-md cursor-not-allowed"
+            >
+              Adding Blog...
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
