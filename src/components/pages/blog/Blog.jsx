@@ -22,15 +22,23 @@ const Blog = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blogs),
-    }).then(() => {
-      setShowpopUp(true);
-      setTimeout(() => setShowpopUp(false), 200);
-      setTitle("");
-      setBody("");
-      setAuthor("Lisa");
-      setIsPending(false);
-      navigate("/");
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          // Log an error if the server responds with a status like 404 or 405
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        // Only proceed if the request was successful
+        setShowpopUp(true);
+        setTimeout(() => setShowpopUp(false), 2000); // Increased timeout for visibility
+        setTitle("");
+        setBody("");
+        setAuthor("Lisa");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   };
 
   return (
