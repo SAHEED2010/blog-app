@@ -28,7 +28,7 @@ const Info = () => {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500 flex flex-col items-center justify-center px-6">
       {isPending && <div>Loading...</div>}
       {blog && (
-        <div className="max-w-2xl w-full bg-gray-200 dark:bg-gray-800 rounded-xl p-6 shadow-lg transition-all duration-300">
+        <article className="max-w-2xl w-full bg-gray-200 dark:bg-gray-800 rounded-xl p-6 shadow-lg transition-all duration-300">
           <h3 className="text-2xl font-bold mb-2">{blog.title}</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Written by {blog.author}
@@ -44,7 +44,7 @@ const Info = () => {
           <Link to="/">
             <h2>Go home</h2>
           </Link>
-        </div>
+        </article>
       )}
 
       {showPopUp && (

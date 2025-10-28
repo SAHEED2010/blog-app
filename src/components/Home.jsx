@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BlogList from "./BlopgList";
+import BlogList from "./pages/blog/BlopgList";
 import UseFetch from "./hooks/UseFetch";
 
 const Home = () => {
@@ -13,10 +13,9 @@ const Home = () => {
 
   // Filter blogs by title (existing logic remains)
   console.log("DEBUG: blogs value:", blogs, "Is array:", Array.isArray(blogs));
- const filteredBlogs = Array.isArray(blogs)
-   ? blogs.filter((blog) => blog.title.includes(searchTerm))
-   : [];
-
+  const filteredBlogs = Array.isArray(blogs)
+    ? blogs.filter((blog) => blog.title.includes(searchTerm))
+    : [];
 
   // Delete handler
   const handleDelete = async (id) => {
